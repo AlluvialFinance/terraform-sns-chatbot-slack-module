@@ -4,6 +4,12 @@ variable "configuration_name" {
 
 }
 
+variable "guardrail_policies" {
+  type        = list(string)
+  default     = ["arn:aws:iam::aws:policy/AdministratorAccess"]
+  description = "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set."
+}
+
 variable "slack_channel_id" {
   type        = string
   description = "The ID of the Slack channel. To get the ID, open Slack, right click on the channel name in the left pane, then choose Copy Link. The channel ID is the 9-character string at the end of the URL. For example, ABCBBLZZZ."
@@ -20,6 +26,12 @@ variable "logging_level" {
   type        = string
   description = "Specifies the logging level for this configuration. This property affects the log entries pushed to Amazon CloudWatch Logs. Logging levels include ERROR, INFO, or NONE."
   default     = "ERROR"
+}
+
+variable "user_role_required" {
+  type        = bool
+  default     = false
+  description = "Enables use of a user role requirement in your chat configuration."
 }
 
 variable "tags" {
